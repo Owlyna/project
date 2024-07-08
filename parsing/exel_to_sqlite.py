@@ -22,8 +22,6 @@ def export_to_sqlite():
 
     # создание таблицы если ее не существует
     cursor.execute('CREATE TABLE IF NOT EXISTS films (id INTEGER PRIMARY KEY AUTOINCREMENT, НазваниеФильма TEXT NOT NULL, ГодВыпуска INTEGER NOT NULL, СтранаВыпуска TEXT NOT NULL, Жанр TEXT NOT NULL, Режиссер TEXT NOT NULL, Оценка REAL NOT NULL, КоличествоОтзывов INTEGER NOT NULL)')
-    #cursor.execute('CREATE TABLE IF NOT EXISTS films (idФильма INTEGER PRIMARY KEY AUTOINCREMENT, НазваниеФильма TEXT, ГодВыпуска INTEGER, idСтраныВыпуска INT, Жанр TEXT, Режиссер TEXT, Оценка REAL, КоличествоОтзывов INTEGER)')
-    #cursor.execute('CREATE TABLE IF NOT EXISTS countries (idСтаныВыпуска INTEGER PRIMARY KEY AUTOINCREMENT, СтранаВыпуска TEXT)')
 
     # 2. Работа c xlsx файлом
 
@@ -36,8 +34,8 @@ def export_to_sqlite():
     for row in range(2, sheet.max_row + 1):
         # Объявление списка
         data = []
-        # Цикл по столбцам от 1 до 8 ( 9 не включая)
-        for col in range(1, 9):
+        # Цикл по столбцам от 2 до 8 ( 9 не включая)
+        for col in range(2, 9):
             # value содержит значение ячейки с координатами row col
             value = sheet.cell(row, col).value
             # Список который мы потом будем добавлять
@@ -46,9 +44,8 @@ def export_to_sqlite():
     # 3. Запись в базу и закрытие соединения
 
         # Вставка данных в поля таблицы
-        cursor.execute("INSERT INTO films (НазваниеФильма, ГодВыпуска, СтранаВыпуска, Жанр, Режиссер, Оценка, КоличествоОтзывов) VALUES ( ?, ?, ?, ?, ?, ?, ?);", (data[1], data[2], data[3], data[4], data[5], data[6], data[7]))
-        #cursor.execute("INSERT INTO films (НазваниеФильма, ГодВыпуска, Жанр, Режиссер, Оценка, КоличествоОтзывов) VALUES ( ?, ?, ?, ?, ?, ?);", (data[0], data[1], data[3], data[4], data[5], data[6]))
-        #cursor.execute("INSERT INTO countries (СтранаВыпуска) VALUES (?);", (data[2]))
+        cursor.execute("INSERT INTO films (НазваниеФильма, ГодВыпуска, СтранаВыпуска, Жанр, Режиссер, Оценка, КоличествоОтзывов) VALUES ( ?, ?, ?, ?, ?, ?, ?);", (data[0], data[1], data[2], data[3], data[4], data[5], data[6]))
+        
 
 
     # сохраняем изменения
