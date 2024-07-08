@@ -35,11 +35,12 @@ for page in range(1, 6):
             director = info_film.split(': ')[-1] 
             #жанр
             genre = info_film.replace('\xa0', ' • ').split(" • ")[1]
-            #рейтинг
+        
             #количество голосов
             votes_film = film.find(class_="styles_kinopoiskCount__PT7ZX")
             for votes in votes_film:
                 votes = votes.text.lstrip(" ")
+            #рейтинг
             value_film = film.find(class_="styles_kinopoiskValuePositive__7AAZG styles_kinopoiskValue__nkZEC styles_top250Type__QsUyJ")
             for value in value_film:
                 value = value.text
